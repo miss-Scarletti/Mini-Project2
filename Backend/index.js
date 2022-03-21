@@ -1,3 +1,7 @@
+const hostname = 'localhost';
+// const hostname = 'http://127.0.0.1';
+const port = 3000;
+
 const express = require('express');
 const app = express();
 
@@ -11,11 +15,12 @@ app.use((req, res, next) => {
  app.use('/static', express.static('public'));
 //  app.use(express.static('files'));
 
-app.listen(3000, () => console.log('[Info] Listening on port 3000!'));
+app.listen(3000, () => console.log(`[Info] Server listening at http://${hostname}:${port}/`));
 
 // app.get('/', (req, res) => res.send('Hello World!'));
 
 function getAllCustomers(req, res) {
+
     res.send({hello: 'world'});
 }
 app.get('/', getAllCustomers);
