@@ -4,14 +4,22 @@ const app = express();
 // Simple request time logger
 app.use((req, res, next) => {
     console.log("A new request received at " + Date.now());
- 
     // This function call tells that more processing is required for the current request and is in the next middlewar function/route handler.
     next();  
  });
 
+ app.use('/static', express.static('public'));
+//  app.use(express.static('files'));
+
 app.listen(3000, () => console.log('[Info] Listening on port 3000!'));
 
-app.get('/', (req, res) => res.send('Hello World!'));
+// app.get('/', (req, res) => res.send('Hello World!'));
+
+function getAllCustomers(req, res) {
+    res.send({hello: 'world'});
+}
+app.get('/', getAllCustomers);
+
 
 app.get('/products', (req, res) => {
     
