@@ -7,7 +7,7 @@ function getCustomerInfo(uuid){
 
 function createCustomer(name, email, password){
     const newUser = {
-        id: Math.floor(Math.random() * 100),
+        id: createUniqID(),
         name: name,
         email: email,
         password: password,
@@ -25,6 +25,8 @@ function updateCustomer(uuid){
     // do stuff
 }
 
-
+function createUniqID(){
+    return Math.floor(Math.random() * 100) + (new Date()).getTime();
+}
 
 module.exports = {getCustomerInfo, createCustomer, deleteCustomer, updateCustomer}
