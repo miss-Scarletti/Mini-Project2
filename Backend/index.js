@@ -42,8 +42,8 @@ app.delete('/customers/:customerId', (req,res) => {
     res.send(customerUtils.deleteCustomer(req.params.customerId));
 });
 
-app.post('/customers/:customerId', (req,res) => {
-    res.send(customerUtils.createCustomer());
+app.post('/customers/:name/:email/:password', (req,res) => {
+    res.send(customerUtils.createCustomer(req.params.name, req.params.email, req.params.password));
 });
 
 
