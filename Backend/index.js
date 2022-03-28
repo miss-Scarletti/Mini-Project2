@@ -5,6 +5,11 @@ const port = 3000;
 const express = require('express');
 const app = express();
 
+const productsUtils = require('./ProductsUtils.js');
+// import productsUtils from './ProductsUtils';
+const customerUtils = require('./CustomerUtils.js');
+const basketUtils = require('./BasketUtils.js');
+
 // Simple request time logger
 app.use((req, res, next) => {
     console.log("A new request received at " + Date.now());
@@ -25,14 +30,39 @@ function getAllCustomers(req, res) {
 }
 app.get('/', getAllCustomers);
 
+app.get('/customers/:customerId', (req,res) => {
+    res.send(customerUtils.getCustomerInfo(req.params.customerId));
+});
+
+app.put('/customers/:customerId', (req,res) => {
+    res.send(customerUtils.updateCustomer(req.params.customerId));
+});
+
+app.delete('/customers/:customerId', (req,res) => {
+    res.send(customerUtils.deleteCustomer(req.params.customerId));
+});
+
+app.post('/customers/:customerId', (req,res) => {
+    res.send(customerUtils.createCustomer());
+});
+
 
 app.get('/products', (req, res) => {
     
-    res.send('List of products');
+    // res.send('List of products');
+    res.send(productsUtils.getProducts());
 });
 
-app.get('/products/:productID', (req, res) => {
-    res.send(req.params);
+app.get('/products/info', (req, res) => {
+    res.send(productsUtils.getMultipleProductsInfo()); //undone function
+});
+
+app.get('/products/product/:productID', (req, res) => {
+    res.send(productsUtils.getSingleProductInfo(req.params.productID));
+});
+
+app.get('/products/category/:category', (req, res) => {
+    res.send(productsUtils.getCategoryItems(req.params.category));
 });
 
 // For invalid routes
