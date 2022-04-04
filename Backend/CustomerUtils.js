@@ -21,8 +21,16 @@ function deleteCustomer(uuid){
     return userData.customers;
 }
 
-function updateCustomer(uuid){
-    // do stuff
+function updateCustomer(uuid, name, email, password){
+    if (users.filter(user => user.id == uuid)) {
+        const user = users.filter(user => user.id == uuid);
+        user.name = name;
+        user.email = email;
+        user.password = password;
+        return "Update Succesfull";
+    } else {
+        return "Error: User not found"
+    }
 }
 
 function createUniqID(){
